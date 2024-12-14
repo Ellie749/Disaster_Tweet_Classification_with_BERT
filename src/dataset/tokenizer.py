@@ -14,8 +14,9 @@ def read_data(train_df_path: str, test_df_path: str):
 
     tokenizer = AutoTokenizer.from_pretrained("bert-base-cased")
     X_train = tokenizer(train_dataframe.text.tolist(), padding=True, max_length=36, truncation=True, return_tensors='tf')
+    print(X_train)
     X_test = tokenizer(test_dataframe.text.tolist(), padding=True, max_length=36, truncation=True, return_tensors='tf')
-    y_train = test_dataframe.text.tolist()
+    y_train = train_dataframe.target.values
     y_test = None
     
     print(np.array(X_train).shape)
@@ -24,4 +25,5 @@ def read_data(train_df_path: str, test_df_path: str):
 
     return X_train, X_test, y_train, y_test
 
-read_data('train.csv', 'test.csv')
+
+
